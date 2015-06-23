@@ -6,7 +6,6 @@ class Dreamer(User):
     phone_number = models.TextField(unique=True, null=True)
     birthdate = models.DateField(null=True)
 
-
 class JournalEntry(models.Model):
     entry = models.TextField()
     date = models.DateField(default=timezone.now, db_index=True)
