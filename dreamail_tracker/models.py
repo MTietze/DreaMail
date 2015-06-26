@@ -5,16 +5,16 @@ import re
 import random
 from django_mailbox.signals import message_received
 from django.dispatch import receiver
-from dreamail_tracker.scripts.parse_journal import process_entry
+from utils import process_entries
 
 @receiver(message_received)
 def save_and_respond(sender, message, **args):
-    body = message.get_body()
-    processed_message = process_entry(body)
-    dreamer = Dreamer.objects.get(email=sender)
+    entries_dict = process_entries(message.text)
+    dreamer = Dreamer.objects.get(email=message.from_address[0])
     dreams = []
-    for dream in processed_message:
-        dreams.append(JournalEntry.objects.create(JournalEntry(dreamer=dreamer, date=dream.date, entry=dream.entry)))
+    for entry_date, entries in entries_dict.iteritems():
+        for entry in entries:
+            dreams.append(JournalEntry.objects.create(dreamer=dreamer, entry=entry, date=entry_date))
 
     response_message = JournalEntry.entries.generate_message(dreamer)
 
@@ -22,7 +22,6 @@ def save_and_respond(sender, message, **args):
         dream.message = response_message
         dream.save()
 
-    print "I just recieved a message titled %s from a mailbox named %s" % (message.subject, message.mailbox.name, )
 
 class Dreamer(User):
     phone_number = models.TextField(unique=True, null=True)
