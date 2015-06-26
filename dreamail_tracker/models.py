@@ -3,6 +3,26 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 import re
 import random
+from django_mailbox.signals import message_received
+from django.dispatch import receiver
+from dreamail_tracker.scripts.parse_journal import process_entry
+
+@receiver(message_received)
+def save_and_respond(sender, message, **args):
+    body = message.get_body()
+    processed_message = process_entry(body)
+    dreamer = Dreamer.objects.get(email=sender)
+    dreams = []
+    for dream in processed_message:
+        dreams.append(JournalEntry.objects.create(JournalEntry(dreamer=dreamer, date=dream.date, entry=dream.entry)))
+
+    response_message = JournalEntry.entries.generate_message(dreamer)
+
+    for dream in dreams:
+        dream.message = response_message
+        dream.save()
+
+    print "I just recieved a message titled %s from a mailbox named %s" % (message.subject, message.mailbox.name, )
 
 class Dreamer(User):
     phone_number = models.TextField(unique=True, null=True)

@@ -12,6 +12,10 @@ def convert_to_date(date_string):
     date_list = [int(d) for d in date_list]
     return date(*date_list)
 
+def process_entry(entry):
+    pass
+
+
 with open('/Users/max/Documents/dreamjournal.txt') as journal:
     for line in journal:
         if re.match(r'\d{1,2}/\d{1,2}/\d{1,4}', line):
