@@ -11,16 +11,17 @@ from utils import process_entries
 def save_and_respond(sender, message, **args):
     entries_dict = process_entries(message.text)
     dreamer = Dreamer.objects.get(email=message.from_address[0])
-    dreams = []
     for entry_date, entries in entries_dict.iteritems():
+        dreams = []
+
         for entry in entries:
             dreams.append(JournalEntry.objects.create(dreamer=dreamer, entry=entry, date=entry_date))
 
-    response_message = JournalEntry.entries.generate_message(dreamer)
+        response_message = JournalEntry.entries.generate_message(dreamer)
 
-    for dream in dreams:
-        dream.message = response_message
-        dream.save()
+        for dream in dreams:
+            dream.message = response_message
+            dream.save()
 
 
 class Dreamer(User):
