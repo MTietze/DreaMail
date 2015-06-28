@@ -12,8 +12,13 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from secret_settings import SECRET_KEY, EMAIL_HOST_PASSWORD, EMAIL_HOST_USER
+
 import dj_database_url
+
+try:
+    from secret_settings import SECRET_KEY, EMAIL_HOST_PASSWORD, EMAIL_HOST_USER
+except:
+    pass
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
