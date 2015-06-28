@@ -12,7 +12,7 @@ DIVIDER = '********************************************************'
 
 @receiver(message_received)
 def save_and_respond(sender, message, **args):
-    entries_dict = process_entries(message.text)
+    entries_dict = process_entries(message)
     dreamer = Dreamer.objects.get(email=message.from_address[0])
     response_messages = []
     for entry_date, entries in entries_dict.iteritems():
