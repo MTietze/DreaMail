@@ -7,26 +7,43 @@ from django_mailbox.signals import message_received
 from django.dispatch import receiver
 from utils import process_entries
 
+RESPONSE_SUBJECT = "Thanks For Dreaming"
+DIVIDER = '********************************************************'
+
 @receiver(message_received)
 def save_and_respond(sender, message, **args):
     entries_dict = process_entries(message.text)
     dreamer = Dreamer.objects.get(email=message.from_address[0])
+    response_messages = []
     for entry_date, entries in entries_dict.iteritems():
         dreams = []
 
         for entry in entries:
             dreams.append(JournalEntry.objects.create(dreamer=dreamer, entry=entry, date=entry_date))
 
-        response_message = JournalEntry.entries.generate_message(dreamer)
+        message = JournalEntry.entries.generate_message(dreamer)
 
         for dream in dreams:
-            dream.message = response_message
+            dream.message = message
             dream.save()
+
+        formatted_date = entry_date.strftime("%A %d. %B %Y")
+        joined_entries = '\n\n'.join(entries)
+        response_message = "{0}\n\nYour dreams have been recorded and the universe has responded:\n\n{3}\n\n{1}\n\n{3}\n\nOn this day, you dreamt:\n\n{2}"\
+            .format(formatted_date, message, joined_entries, DIVIDER)
+
+        response_messages.append(response_message)
+
+    joined_messages = "\n\n{0}{0}\n{0}{0}\n\n".format(DIVIDER).join(response_messages)
+    response_messages = re.sub('[\r\n]{3,}','\n\n',joined_messages)
+
+    dreamer.email_user(RESPONSE_SUBJECT, response_messages)
 
 
 class Dreamer(User):
     phone_number = models.TextField(unique=True, null=True)
     birthdate = models.DateField(null=True)
+
 
 class EntryManager(models.Manager):
     def get_lexicon(self, dreamer):
@@ -38,7 +55,7 @@ class EntryManager(models.Manager):
 
     def generate_message(self, dreamer, lines=6):
         lexicon = self.get_lexicon(dreamer)
-        message = [" ".join(random.sample(lexicon, i)) for i in range(lines)]
+        message = [" ".join(random.sample(lexicon, i)) for i in range(1, lines)]
         longest = len(max(message, key=len))
         message = [m.center(longest, ' ') for m in message]
         message = "\n".join(message)
@@ -52,6 +69,7 @@ class JournalEntry(models.Model):
     dreamer = models.ForeignKey(Dreamer, db_index=True)
     entries = EntryManager()
     objects = models.Manager()
+
 
 
 

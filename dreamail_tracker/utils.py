@@ -20,7 +20,7 @@ def process_entries(message):
             entry_date = convert_to_date(date_string)
             entries_dict[entry_date] = ['']
         else:
-            later = re.split(r'later\sdream\s*-?,?\s+|separate\sdream\s*-?,?\s+', line, flags=re.I)
+            later = re.split('later\sdream\s*-?,?\s+|separate\sdream\s*-?,?\s+', line, flags=re.I)
             if len(later) > 1:
                 entries_dict[entry_date][-1] += later[0]
                 capitalized_second_dream = later[1].capitalize()
