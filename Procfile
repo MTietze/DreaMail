@@ -1,1 +1,1 @@
-web: gunicorn DreaMail.wsgi
+web: honcho -f ProcfileHoncho start

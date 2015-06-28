@@ -12,13 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-
 import dj_database_url
-
-try:
-    from secret_settings import SECRET_KEY, EMAIL_HOST_PASSWORD, EMAIL_HOST_USER
-except:
-    pass
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -26,6 +20,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
+SECRET_KEY = os.environ['SECRET_KEY']
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -78,7 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'DreaMail.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
@@ -118,5 +112,7 @@ STATICFILES_DIRS = (
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

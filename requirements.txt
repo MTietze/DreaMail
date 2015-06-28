@@ -4,6 +4,7 @@ Django==1.8.2
 django-mailbox==4.3.4
 django-toolbelt==0.0.1
 gunicorn==19.3.0
+honcho==0.6.6
 psycopg2==2.6.1
 six==1.9.0
 static3==0.6.1
