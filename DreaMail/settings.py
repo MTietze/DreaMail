@@ -14,13 +14,29 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 import dj_database_url
 
+# allow for pycharm debugging
+def load_environment():
+    env = {}
+    with open('.env', 'r') as env_file:
+        env_vars = env_file.readlines()
+        for v in env_vars:
+            v = v.strip().replace('"', '').replace("'", '')
+            if v and v[0] != '#':
+                v = v.split('=')
+                env[v[0]] = v[1]
+
+    os.environ.update(env)
+
+load_environment()
+
+SECRET_KEY = os.environ['SECRET_KEY']
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-SECRET_KEY = os.environ['SECRET_KEY']
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -77,14 +93,8 @@ WSGI_APPLICATION = 'DreaMail.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dreamail',
-        'HOST': 'localhost'
-    }
+    'default': dj_database_url.config(default=os.environ['DATABASE_URL'])
 }
-
-DATABASES['default'] = dj_database_url.config()
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
