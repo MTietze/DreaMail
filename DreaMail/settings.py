@@ -14,20 +14,21 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 import dj_database_url
 
-# allow for pycharm debugging
-def load_environment():
-    env = {}
-    with open('.env', 'r') as env_file:
-        env_vars = env_file.readlines()
-        for v in env_vars:
-            v = v.strip().replace('"', '').replace("'", '')
-            if v and v[0] != '#':
-                v = v.split('=')
-                env[v[0]] = v[1]
-
-    os.environ.update(env)
-
-load_environment()
+if os.environ.get('ENV') != 'Production':
+    # allow for pycharm debugging
+    def load_environment():
+        env = {}
+        with open('.env', 'r') as env_file:
+            env_vars = env_file.readlines()
+            for v in env_vars:
+                v = v.strip().replace('"', '').replace("'", '')
+                if v and v[0] != '#':
+                    v = v.split('=')
+                    env[v[0]] = v[1]
+    
+        os.environ.update(env)
+    
+    load_environment()
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
