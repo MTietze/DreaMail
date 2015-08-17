@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+ <section ng-app='dreamail'>
+    <base href="/dreamail/">
+    <div >
+
+    <!--   <div id="spin-wrapper" ng-show="bigLoader.loading">
+        <img id="spinner" ng-src="{{STATIC_URL}}scout/img/loader.gif">
+        <div id="spinnerbk"></div> -->
+      </div>
+
+      {% verbatim %}
+        <div ui-view id="main-view"></div>
+      {% endverbatim %}
+    </div>
+  </section>
+
+	
+{% endblock content %}
