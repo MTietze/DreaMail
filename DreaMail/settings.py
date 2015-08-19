@@ -34,7 +34,6 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -75,7 +74,7 @@ ROOT_URLCONF = 'DreaMail.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ BASE_DIR + '/../dreamail_tracker/static/dist/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -114,10 +113,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/dist/'
+STATIC_ROOT = 'dreamail_tracker/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
+    BASE_DIR + '/../dreamail_tracker/static/dist/scripts/',
 )
 
 EMAIL_HOST = 'smtp.gmail.com'
