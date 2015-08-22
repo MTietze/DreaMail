@@ -1,6 +1,31 @@
 {% extends "base.html" %}
+{% load staticfiles %}
+
 {% block content %}
- <section ng-app='dreamail'>
+<script type="text/javascript">
+  var config = {
+    APP_NAME: 'dreamail',
+    API_PATH : '/api/',
+    API_ENDPOINTS: {
+      'dreams': 'dreams/'
+    },
+    PATHS:{
+      HOME: 'home',
+    }
+  }
+</script>
+
+<link rel="stylesheet" type="text/css" href="{% static 'styles/base.css' %}">
+
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'styles/vendor.css' %}"> -->
+
+<script type="text/javascript" src="{% static 'javascript/vendor.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'javascript/templates.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'javascript/base.js' %}"></script>
+
+  <section ng-app='dreamail'>
     <base href="/dreamail/">
     <div >
 
@@ -14,6 +39,5 @@
       {% endverbatim %}
     </div>
   </section>
-
 	
 {% endblock content %}

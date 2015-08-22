@@ -1,0 +1,1 @@
+angular.module('dreamail', ['ui.router', 'mgcrea.ngStrap', 'templates']);
