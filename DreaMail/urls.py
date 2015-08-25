@@ -17,8 +17,10 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views, urls
 from dreamail_tracker.views import DreamView
+from dreamail_tracker.api import api
 urlpatterns = [
 	url('^', include('django.contrib.auth.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', DreamView.as_view(), name='home'),
+    url(r'^api/dreams/$', api.get_dreams, name='get_dreams'),
 ]

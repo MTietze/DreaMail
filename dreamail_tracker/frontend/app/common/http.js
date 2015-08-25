@@ -2,8 +2,10 @@ angular
   .module(config.APP_NAME)
   .factory('httpFactory', httpFactory);
 
-function httpFactory($http){
+function httpFactory($http, $cookies){
   
+  $http.defaults.headers.common['X-CSRFToken'] = $cookies.get('csrftoken');
+
   return function(endpoint) {
       
       var url = config.API_PATH + config.API_ENDPOINTS[endpoint];

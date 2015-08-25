@@ -21,7 +21,7 @@ def save_and_respond(sender, message, **args):
         for entry in entries:
             dreams.append(JournalEntry.objects.create(dreamer=dreamer, entry=entry, date=entry_date))
 
-        message = JournalEntry.entries.generate_message(dreamer)
+        message = Dreamer.entries.generate_message()
 
         for dream in dreams:
             dream.message = message
@@ -40,34 +40,35 @@ def save_and_respond(sender, message, **args):
     dreamer.email_user(RESPONSE_SUBJECT, response_messages)
 
 
-class Dreamer(User):
-    phone_number = models.TextField(unique=True, null=True)
-    birthdate = models.DateField(null=True)
 
 
 class EntryManager(models.Manager):
-    def get_lexicon(self, dreamer):
-        words = self.filter(dreamer=dreamer).values_list('entry', flat=True)
-        word_list = " ".join(words)
-        word_list = re.findall("[a-zA-Z'\-]+", word_list)
-        lexicon = list(set([word.lower() for word in word_list]))
-        return lexicon
-
-    def generate_message(self, dreamer, lines=6):
-        lexicon = self.get_lexicon(dreamer)
+    
+    def generate_message(self, lines=6):
+        lexicon = self.get_lexicon()
         message = [" ".join(random.sample(lexicon, i)) for i in range(1, lines)]
         longest = len(max(message, key=len))
         message = [m.center(longest, ' ') for m in message]
         message = "\n".join(message)
         return message
 
+class Dreamer(User):
+    phone_number = models.TextField(unique=True, blank=True)
+    birthdate = models.DateField(null=True)
+    entries = EntryManager()
 
+    def get_lexicon(self):
+        words = self.journalentry_set.values_list('entry', flat=True)
+        word_list = " ".join(words)
+        word_list = re.findall("[a-zA-Z'\-]+", word_list)
+        lexicon = list(set([word.lower() for word in word_list]))
+        return lexicon
+        
 class JournalEntry(models.Model):
     entry = models.TextField()
     message = models.TextField(blank=True)
     date = models.DateField(default=timezone.now, db_index=True)
     dreamer = models.ForeignKey(Dreamer, db_index=True)
-    entries = EntryManager()
     objects = models.Manager()
 
 

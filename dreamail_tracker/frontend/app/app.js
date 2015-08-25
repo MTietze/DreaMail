@@ -1,1 +1,1 @@
-angular.module('dreamail', ['ui.router', 'mgcrea.ngStrap', 'templates']);
+angular.module('dreamail', ['ui.router', 'mgcrea.ngStrap', 'templates', 'angular-jqcloud', 'ngCookies']);

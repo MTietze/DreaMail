@@ -80,7 +80,7 @@ exports.config = {
     }
   },
   plugins: {
-    on: ['ng-annotate-brunch', 'angular_templates', 'uglify-js-brunch'],
+    on: ['ng-annotate-brunch', 'angular_templates'],
     angular_templates:{
       path_transform: function (path)  {return path.replace(/.*\/.*\//, 'templates/');}
     }

@@ -19,6 +19,6 @@ function home(){
   function homeController(dreamService) {
       var vm = this; 
       vm.stats = dreamService.stats;
-      
+      vm.words = dreamService.lexicon;
   }
 }
