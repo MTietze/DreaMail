@@ -1,5 +1,6 @@
 import re
 import datetime
+from smart_quotes import convert_smart_quotes
 
 # creates an eastern timezone instance
 class EST5EDT(datetime.tzinfo):
@@ -29,7 +30,8 @@ def convert_to_date(date_string):
     return datetime.date(*date_list)
 
 def process_entries(message):
-    lines = message.text.strip().split('\n')
+    msg = convert_smart_quotes(message.text.strip())
+    lines = msg.split('\n')
     entries_dict = {}
     if not re.match(r'\d{1,2}/\d{1,2}/\d{1,4}', lines[0]):
         entry_date = message.processed.astimezone(tz=EST5EDT())
@@ -48,3 +50,4 @@ def process_entries(message):
             else:
                 entries_dict[entry_date][-1] += later[0]
     return entries_dict
+

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.utils.encoding import smart_str
 import re
 import random
 from django_mailbox.signals import message_received
@@ -21,7 +22,7 @@ def save_and_respond(sender, message, **args):
         for entry in entries:
             dreams.append(JournalEntry.objects.create(dreamer=dreamer, entry=entry, date=entry_date))
 
-        message = Dreamer.entries.generate_message()
+        message = dreamer.generate_message()
 
         for dream in dreams:
             dream.message = message
@@ -40,22 +41,9 @@ def save_and_respond(sender, message, **args):
     dreamer.email_user(RESPONSE_SUBJECT, response_messages)
 
 
-
-
-class EntryManager(models.Manager):
-    
-    def generate_message(self, lines=6):
-        lexicon = self.get_lexicon()
-        message = [" ".join(random.sample(lexicon, i)) for i in range(1, lines)]
-        longest = len(max(message, key=len))
-        message = [m.center(longest, ' ') for m in message]
-        message = "\n".join(message)
-        return message
-
 class Dreamer(User):
     phone_number = models.TextField(unique=True, blank=True)
     birthdate = models.DateField(null=True)
-    entries = EntryManager()
 
     def get_lexicon(self):
         words = self.journalentry_set.values_list('entry', flat=True)
@@ -63,6 +51,14 @@ class Dreamer(User):
         word_list = re.findall("[a-zA-Z'\-]+", word_list)
         lexicon = list(set([word.lower() for word in word_list]))
         return lexicon
+
+    def generate_message(self, lines=6):
+        lexicon = self.get_lexicon()
+        message = [" ".join(random.sample(lexicon, i)) for i in range(1, lines)]
+        longest = len(max(message, key=len))
+        message = [m.center(longest, ' ') for m in message]
+        message = "\n".join(message)
+        return message
         
 class JournalEntry(models.Model):
     entry = models.TextField()
