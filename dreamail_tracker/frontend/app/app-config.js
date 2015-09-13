@@ -6,7 +6,8 @@ angular.module(config.APP_NAME)
       var dreamsPromise = {
           /*@ngInject*/
           search: function($stateParams, dreamService){
-              return dreamService.get($stateParams);
+              var user_id = $stateParams.uid;
+              return dreamService.getDreams(user_id);
           },
     };
       $stateProvider

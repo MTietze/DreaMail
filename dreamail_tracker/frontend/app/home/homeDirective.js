@@ -20,5 +20,6 @@ function home(){
       var vm = this; 
       vm.stats = dreamService.stats;
       vm.words = dreamService.lexicon;
+      vm.colors = ["#800026", "#bd0026", "#e31a1c", "#fc4e2a", "#fd8d3c", "#feb24c", "#fed976"];
   }
 }

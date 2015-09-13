@@ -3,12 +3,11 @@ angular
 .service('dreamService', function(httpFactory){
     var _this = {};
 
-    _this.get = get;
+    _this.getDreams = getDreams;
 
-    function get (stateParams){
-      var uid = stateParams.uid;
+    function getDreams (user_id){
       var data = {
-        'uid': uid,
+        'uid': user_id,
       };
       return new httpFactory('dreams').post(data).success(update).error(showError);
     }

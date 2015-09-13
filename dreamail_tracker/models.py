@@ -7,6 +7,7 @@ import random
 from django_mailbox.signals import message_received
 from django.dispatch import receiver
 from utils import process_entries
+from collections import defaultdict
 
 RESPONSE_SUBJECT = "Thanks For Dreaming"
 DIVIDER = '********************************************************'
@@ -45,10 +46,28 @@ class Dreamer(User):
     phone_number = models.TextField(unique=True, blank=True)
     birthdate = models.DateField(null=True)
 
-    def get_lexicon(self):
+    def get_lexicon(self, format='unique'):
         words = self.journalentry_set.values_list('entry', flat=True)
         word_list = " ".join(words)
         word_list = re.findall("[a-zA-Z'\-]+", word_list)
+        if format == 'unique':
+            lexicon = self.unique_lexicon(word_list)
+        elif format == 'weighted':
+            lexicon = self.weighted_lexicon(word_list)
+        else:
+            raise ValueError('Please use acceptable format')
+        return lexicon
+
+    @staticmethod
+    def weighted_lexicon(word_list):
+        weighted_words = defaultdict(int)
+        for word in word_list:
+            weighted_words[word.lower()] += 1
+        lexicon = [ { "text": text, 'weight' : weight } for text, weight in weighted_words.iteritems()]
+        return lexicon
+
+    @staticmethod
+    def unique_lexicon(word_list):
         lexicon = list(set([word.lower() for word in word_list]))
         return lexicon
 

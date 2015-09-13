@@ -8,7 +8,7 @@ def get_dreams(request):
     body = json.loads(request.body)
     uid = body.get('uid')
     dreamer = Dreamer.objects.get(user_ptr_id=uid)
-    lexicon = dreamer.get_lexicon()
+    lexicon = dreamer.get_lexicon(format='weighted')
     data = json.dumps(lexicon)
     return processHttpResponse(request, HttpResponse, data)
 
