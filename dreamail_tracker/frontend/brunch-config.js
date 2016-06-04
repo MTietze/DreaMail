@@ -18,7 +18,7 @@ exports.config = {
     javascripts: {
       joinTo: {
         '/javascript/base.js': /^app/,
-        '/javascript/vendor.js': /^(vendor|node_modules|bower_components)/
+        '/javascript/vendor.js': /^(vendor|node_modules)/
       },
       order: {
         before: ['app/app.js', 
@@ -28,7 +28,7 @@ exports.config = {
     stylesheets: {
       joinTo: {
         '/styles/base.css': /^styles/,
-        '/styles/vendor.css': /^(vendor|node_modules|bower_components)/,
+        '/styles/vendor.css': /^(vendor|node_modules)/,
       }
     },
     templates: {
@@ -67,13 +67,13 @@ exports.config = {
         javascripts: {
           joinTo: {
             '/javascript/base.min.js': /^app\/*.js/,
-            '/javascript/vendor.min.js': /^(vendor|node_modules|bower_components)/,
+            '/javascript/vendor.min.js': /^(vendor|node_modules)/,
           }
         },
         stylesheets: {
           joinTo: {
             '/styles/base.min.css': /^styles/,
-            '/styles/vendor.min.css': /^(vendor|node_modules|bower_components)/,
+            '/styles/vendor.min.css': /^(vendor|node_modules)/,
           }
         }
       },
