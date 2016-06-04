@@ -1,4 +1,4 @@
-from django.utils.encoding import smart_unicode
+from django.utils.encoding import smart_text
 
 # translation mapping table that converts
 # single smart quote characters to standard
@@ -29,4 +29,4 @@ def convert_smart_quotes(str):
 	Convert "smart quotes" from Microsoft products
 	to standard quotes.
 	"""
-	return smart_unicode(str).translate(DOUBLE_QUOTE_MAP).translate(SINGLE_QUOTE_MAP)
+	return smart_text(str).translate(DOUBLE_QUOTE_MAP).translate(SINGLE_QUOTE_MAP)

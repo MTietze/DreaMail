@@ -1,6 +1,6 @@
 import re
 import datetime
-from smart_quotes import convert_smart_quotes
+from .smart_quotes import convert_smart_quotes
 
 # creates an eastern timezone instance
 class EST5EDT(datetime.tzinfo):

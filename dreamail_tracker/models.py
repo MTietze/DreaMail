@@ -6,7 +6,7 @@ import re
 import random
 from django_mailbox.signals import message_received
 from django.dispatch import receiver
-from utils import process_entries
+from .utils import process_entries
 from collections import defaultdict
 
 RESPONSE_SUBJECT = "Thanks For Dreaming"
