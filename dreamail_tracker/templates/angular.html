@@ -2,43 +2,46 @@
 {% load staticfiles %}
 
 {% block content %}
-<script type="text/javascript">
-  var config = {
-    APP_NAME: 'dreamail',
-    API_PATH : '/api/',
-    API_ENDPOINTS: {
-      'dreams': 'dreams/'
-    },
-    PATHS:{
-      HOME: 'home',
-      DREAMS: 'dreams',
-    }
-  }
-</script>
+    <script type="text/javascript">
+        var config = {
+            APP_NAME: 'dreamail',
+            API_PATH: '/api/',
+            API_ENDPOINTS: {
+                'dreams': 'dreams/'
+            },
+            PATHS: {
+                HOME: 'home',
+                DREAMS: 'dreams',
+            }
+        }
+    </script>
 
-<link rel="stylesheet" type="text/css" href="{% static 'styles/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
 
-<!-- <link rel="stylesheet" type="text/css" href="{% static 'styles/vendor.css' %}"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'styles/vendor.css' %}"> -->
+    <script type="text/javascript" src="{% static 'vendor.js' %}"></script>
+    <script type="text/javascript" src="{% static 'base.js' %}"></script>
+    <script>require('main');</script>
+    <base href="/">
 
-<script type="text/javascript" src="{% static 'javascript/vendor.js' %}"></script>
-
-<script type="text/javascript" src="{% static 'javascript/templates.js' %}"></script>
-
-<script type="text/javascript" src="{% static 'javascript/base.js' %}"></script>
-
-  <section ng-app='dreamail'>
+    {% verbatim %}
+    <app>
+        Loading...
+    </app>
+    {% endverbatim %}
+    <!--   <section ng-app='dreamail'>
     <base href="/dreamail/">
     <div >
 
-    <!--   <div id="spin-wrapper" ng-show="bigLoader.loading">
+      <div id="spin-wrapper" ng-show="bigLoader.loading">
         <img id="spinner" ng-src="{{STATIC_URL}}scout/img/loader.gif">
-        <div id="spinnerbk"></div> -->
+        <div id="spinnerbk"></div>
       </div>
 
       {% verbatim %}
         <div ui-view id="main-view"></div>
       {% endverbatim %}
     </div>
-  </section>
-	
+  </section> -->
+
 {% endblock content %}
