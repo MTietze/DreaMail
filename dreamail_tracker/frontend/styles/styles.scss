@@ -1,3 +1,13 @@
-body {
-	color: #00ff00;
+.journal-entry{
+	.dream-date{
+	}
+	.dream-input{
+		display: block;
+	    width: 50%;
+	    height: 30%;
+	    margin: 1% 0;
+	}
+}
+.dream-response{
+	white-space: pre-wrap;
 }

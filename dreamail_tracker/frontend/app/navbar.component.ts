@@ -33,10 +33,10 @@ import {ROUTER_DIRECTIVES} from '@angular/router';
     <nav>
       <ul>
         <li>
-          <a [routerLink]="['']" [class.active]="isActive('/')">Home</a>
+          <a [routerLink]="['']" [class.active]="isActive('/')">New Entry</a>
         </li>
         <li>
-          <a [routerLink]="['about']" [class.active]="isActive('/about')">About</a>
+          <a [routerLink]="['about']" [class.active]="isActive('/about')">Metrics</a>
         </li>
       </ul>
     </nav>

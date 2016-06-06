@@ -30,7 +30,7 @@ import {NavBar} from './navbar.component';
   `],
   template: `
     <header>
-      <h1>Hello {{ name }}</h1>
+      <h1>Welcome to {{ name }}</h1>
     </header>
     <navbar></navbar>
     <main>
