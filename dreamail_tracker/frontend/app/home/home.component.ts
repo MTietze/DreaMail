@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FORM_DIRECTIVES} from '@angular/common';
+import {Http, Headers} from '@angular/http';
 
 @Component({
-  selector: 'home',
+  selector: 'new-dream',
   directives: [
     ...FORM_DIRECTIVES
   ],
@@ -11,13 +12,34 @@ import {FORM_DIRECTIVES} from '@angular/common';
   template: require('./home.component.html')()
 })
 export default class HomeComponent implements OnInit {
-  public title: any;
-  constructor() {
-    this.title = { value: 'Angular 2' };
+  public dream: Object;
+  public message: string;
+  private headers: Headers;
+
+  constructor(public http: Http) {
+    this.dream = { date: new Date(Date.now()).toISOString().slice(0, 10)};
+    this.http = http;
+    this.headers = new Headers();
+    this.headers.append('X-CSRFToken', CSRF);
+    this.headers.append('Content-Type', 'application/json');
+  }
+ 
+  onSubmit(form: any): void {
+    let post_data = JSON.stringify(this.dream)
+    this.http.post('/api/dream/', post_data, {headers: this.headers})
+      .map(res => res.json())
+      .subscribe(
+        data => this.message = data.message,
+        err => this.logError(err)
+      );
   }
 
   ngOnInit() {
     console.log('hello Home component');
+  }
+
+  logError(err) {
+    console.error('There was an error: ' + err);
   }
 
 }

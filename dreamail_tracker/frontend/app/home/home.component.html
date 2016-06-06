@@ -1,5 +1,10 @@
 <div>
-  <div>Your Content Here</div>
-  <input type="text" [(ngModel)]="title.dinger">
-  <pre>this.test = {{ title | json }}</pre>
+	<form #f="ngForm"
+          (ngSubmit)="onSubmit(f)">
+  	<div>New Journal Entry</div>
+  	<input type="date" [(ngModel)]="dream.date">
+  	<input type="text" [(ngModel)]="dream.text">
+  	<button>Submit</button>
+  </form>
+  <div>{{message}}</div>
 </div>

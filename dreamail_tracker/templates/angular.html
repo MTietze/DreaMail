@@ -23,6 +23,9 @@
     <script type="text/javascript" src="{% static 'base.js' %}"></script>
     <script>require('main');</script>
     <base href="/">
+    <script>
+      const CSRF = "{{ csrf_token }}";
+    </script>
 
     {% verbatim %}
     <app>

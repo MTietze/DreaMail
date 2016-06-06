@@ -30,7 +30,7 @@ with open('/Users/max/Documents/dreamjournal.txt') as journal:
             else:
                 entries_dict[date_string][-1] += later[0]
 
-    for entry_date, entries in entries_dict.iteritems():
+    for entry_date, entries in entries_dict.items():
         entry_date = convert_to_date(entry_date)
         for entry in entries:
             JournalEntry.objects.create(dreamer_id=dreamer_id, entry=entry, date=entry_date)

@@ -22,5 +22,6 @@ urlpatterns = [
 	url('^', include('django.contrib.auth.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', DreamView.as_view(), name='home'),
-    url(r'^api/dreams/$', api.get_dreams, name='get_dreams'),
+    url(r'^api/get_lexicon/$', api.get_lexicon, name='get_dreams'),
+    url(r'^api/dream/$', api.dream, name='get_dreams'),
 ]

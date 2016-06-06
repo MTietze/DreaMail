@@ -14,31 +14,9 @@ DIVIDER = '********************************************************'
 
 @receiver(message_received)
 def save_and_respond(sender, message, **args):
-    entries_dict = process_entries(message)
     dreamer = Dreamer.objects.get(email=message.from_address[0])
-    response_messages = []
-    for entry_date, entries in entries_dict.iteritems():
-        dreams = []
-
-        for entry in entries:
-            dreams.append(JournalEntry.objects.create(dreamer=dreamer, entry=entry, date=entry_date))
-
-        message = dreamer.generate_message()
-
-        for dream in dreams:
-            dream.message = message
-            dream.save()
-
-        formatted_date = entry_date.strftime("%A %d. %B %Y")
-        joined_entries = '\n\n'.join(entries)
-        response_message = "{0}\n\nYour dreams have been recorded and the universe has responded:\n\n{3}\n\n{1}\n\n{3}\n\nOn this day, you dreamt:\n\n{2}"\
-            .format(formatted_date, message, joined_entries, DIVIDER)
-
-        response_messages.append(response_message)
-
-    joined_messages = "\n\n{0}{0}\n{0}{0}\n\n".format(DIVIDER).join(response_messages)
-    response_messages = re.sub('[\r\n]{3,}','\n\n',joined_messages)
-
+    entries_dict = process_entries(message)
+    response_messages = JournalEntry.save_entry(dreamer=dreamer, entries_dict=entries_dict)
     dreamer.email_user(RESPONSE_SUBJECT, response_messages)
 
 
@@ -63,7 +41,7 @@ class Dreamer(User):
         weighted_words = defaultdict(int)
         for word in word_list:
             weighted_words[word.lower()] += 1
-        lexicon = [ { "text": text, 'weight' : weight } for text, weight in weighted_words.iteritems()]
+        lexicon = [ { "text": text, 'weight' : weight } for text, weight in weighted_words.items()]
         return lexicon
 
     @staticmethod
@@ -85,6 +63,32 @@ class JournalEntry(models.Model):
     date = models.DateField(default=timezone.now, db_index=True)
     dreamer = models.ForeignKey(Dreamer, db_index=True)
     objects = models.Manager()
+
+    @classmethod
+    def save_entry(cls, dreamer, entries_dict):
+        response_messages = []
+        for entry_date, entries in entries_dict.items():
+            dreams = []
+
+            for entry in entries:
+                dreams.append(cls.objects.create(dreamer=dreamer, entry=entry, date=entry_date))
+
+            message = dreamer.generate_message()
+
+            for dream in dreams:
+                dream.message = message
+                dream.save()
+
+            formatted_date = entry_date.strftime("%A %d. %B %Y")
+            joined_entries = '\n\n'.join(entries)
+            response_message = "{0}\n\nYour dreams have been recorded and the universe has responded:\n\n{3}\n\n{1}\n\n{3}\n\nOn this day, you dreamt:\n\n{2}"\
+                .format(formatted_date, message, joined_entries, DIVIDER)
+
+            response_messages.append(response_message)
+
+        joined_messages = "\n\n{0}{0}\n{0}{0}\n\n".format(DIVIDER).join(response_messages)
+        response_messages = re.sub('[\r\n]{3,}','\n\n',joined_messages)
+        return response_messages
 
 
 

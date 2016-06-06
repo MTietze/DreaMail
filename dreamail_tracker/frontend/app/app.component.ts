@@ -37,7 +37,7 @@ import {NavBar} from './navbar.component';
       <router-outlet></router-outlet>
     </main>
     <footer>
-      Brunch for Angular 2 by <a [href]="url">Colin Bate</a>
+      DreaMail dream journal and metrics by <a [href]="url" target="_blank">Max Tietze</a>
     </footer>
   `
 })
@@ -46,8 +46,8 @@ import {NavBar} from './navbar.component';
   new Route({path: 'about', component: About})
 ])
 export class App {
-  name: string = 'Brunch for Angular 2';
-  url: string = 'http://colin.is/blog';
+  name: string = 'DreaMail';
+  url: string = 'https://github.com/MTietze';
   constructor() {
 
   }
