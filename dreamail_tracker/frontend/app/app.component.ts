@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Routes, Route, Router, ROUTER_DIRECTIVES} from '@angular/router';
-import {FORM_PROVIDERS} from '@angular/common';
+import {FORM_PROVIDERS, Location} from '@angular/common';
 
 import {Home} from './home';
 import {About} from './about';
@@ -48,7 +48,9 @@ import {NavBar} from './navbar.component';
 export class App {
   name: string = 'DreaMail';
   url: string = 'https://github.com/MTietze';
-  constructor() {
-
+  constructor(public loc: Location) {
+    if(ANGULAR_PATH){
+      loc.go(ANGULAR_PATH)
+    }
   }
 }

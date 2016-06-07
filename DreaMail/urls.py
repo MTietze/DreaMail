@@ -16,12 +16,18 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views, urls
-from dreamail_tracker.views import DreamView
+from dreamail_tracker.views import DreamView, AngularRedirectView
 from dreamail_tracker.api import api
 urlpatterns = [
+    url(
+        r'^(?P<angularpath>(?!api|admin).+)',
+        AngularRedirectView.as_view(),
+        name='angularredirect'
+    ),
 	url('^', include('django.contrib.auth.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', DreamView.as_view(), name='home'),
     url(r'^api/get_lexicon/$', api.get_lexicon, name='get_dreams'),
     url(r'^api/dream/$', api.dream, name='get_dreams'),
+
 ]

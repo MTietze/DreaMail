@@ -3,7 +3,10 @@
 
 {% block content %}
     <script type="text/javascript">
-        var config = {
+        const ANGULAR_PARAMS = {{ ANGULAR_PARAMS|safe }};
+        const ANGULAR_PATH = "{{ ANGULAR_PATH }}";
+        const CSRF = "{{ csrf_token }}";
+        const config = {
             APP_NAME: 'dreamail',
             API_PATH: '/api/',
             API_ENDPOINTS: {
@@ -23,9 +26,6 @@
     <script type="text/javascript" src="{% static 'base.js' %}"></script>
     <script>require('main');</script>
     <base href="/">
-    <script>
-      const CSRF = "{{ csrf_token }}";
-    </script>
 
     {% verbatim %}
     <app>
