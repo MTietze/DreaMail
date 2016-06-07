@@ -1,6 +1,9 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, OnDestroy} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map'
+
+declare var jQuery: any;
+declare var jQCloud: any;
 
 @Component({
   selector: 'about',
@@ -10,10 +13,13 @@ import 'rxjs/add/operator/map'
 export default class AboutComponent implements OnInit, OnDestroy {
   public name: string;
   public lexicon: string;
-  
-  constructor(public http: Http) {
+  private elementRef: ElementRef;
+  private http: Http;
+
+  constructor(http: Http, @Inject(ElementRef) elementRef: ElementRef) {
     this.name = 'Brunch';
     this.http = http;
+    this.elementRef = elementRef;
   }
 
   
@@ -25,7 +31,7 @@ export default class AboutComponent implements OnInit, OnDestroy {
     this.http.get('/api/get_lexicon/',  {headers: headers})
       .map(res => res.json())
       .subscribe(
-        data => this.lexicon = data.lexicon,
+        data => this.displayCloud(data),
         err => this.logError(err),
         () => console.log('Random Quote Complete')
       );
@@ -33,6 +39,11 @@ export default class AboutComponent implements OnInit, OnDestroy {
 
   logError(err) {
   	console.error('There was an error: ' + err);
+  }
+
+  displayCloud(data) {
+  	this.lexicon = data.lexicon
+		jQuery(this.elementRef.nativeElement).find('.jqcloud').jQCloud(this.lexicon)
   }
 
   ngOnInit() { console.log('About::ngOnInit'); this.getLexicon()}
