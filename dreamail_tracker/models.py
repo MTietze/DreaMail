@@ -64,6 +64,14 @@ class JournalEntry(models.Model):
     dreamer = models.ForeignKey(Dreamer, db_index=True)
     objects = models.Manager()
 
+    def get_data(self):
+        data = {
+            'entry': self.entry,
+            'date': str(self.date),
+            'message': self.message
+        }
+        return data
+
     @classmethod
     def save_entry(cls, dreamer, entries_dict):
         response_messages = []

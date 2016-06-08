@@ -1,0 +1,10 @@
+<div>
+	<div *ngFor='let dream of dreams'
+        class="journal-entry">
+  	<p>{{ dream.date }}</p>
+    <p class="dream-title">{{ dream.title }}</p>
+    <p class="dream-text">{{ dream.entry }}</p>
+    <p>The universe responded:</p>
+    <p class="dream-response">{{ dream.message }}</p>
+  </div>
+</div>

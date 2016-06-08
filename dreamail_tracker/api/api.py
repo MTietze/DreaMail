@@ -10,14 +10,18 @@ def get_lexicon(request):
     data = {"lexicon": lexicon}
     return processHttpResponse(request, HttpResponse, data)
 
-@require_http_methods(['POST'])
+@require_http_methods(['POST', 'GET'])
 def dream(request):
-    dream = json.loads(request.read().decode())
-    dream_date = datetime.strptime(dream['date'], "%Y-%m-%d").date()
-    entries_dict = {dream_date: [dream['text']]}
     dreamer = Dreamer.objects.get(user_ptr_id=request.user.id)
-    response_message = JournalEntry.save_entry(dreamer=dreamer, entries_dict=entries_dict)
-    data = {'message': response_message}
+    if request.method == 'POST':
+        dream = json.loads(request.read().decode())
+        dream_date = datetime.strptime(dream['date'], "%Y-%m-%d").date()
+        entries_dict = {dream_date: [dream['text']]}
+        response_message = JournalEntry.save_entry(dreamer=dreamer, entries_dict=entries_dict)
+        data = {'message': response_message}
+    elif request.method == 'GET':
+        dreams = [d.get_data() for d in dreamer.journalentry_set.all()]
+        data = {'dreams': dreams}
     return processHttpResponse(request, HttpResponse, data)
 
 def processHttpResponse(request, response_type, data={}):
