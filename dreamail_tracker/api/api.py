@@ -16,7 +16,7 @@ def dream(request):
     if request.method == 'POST':
         dream = json.loads(request.read().decode())
         dream_date = datetime.strptime(dream['date'], "%Y-%m-%d").date()
-        entries_dict = {dream_date: [dream['text']]}
+        entries_dict = {dream_date: [{'title': dream.get('title',''), 'text': dream['text']}]}
         response_message = JournalEntry.save_entry(dreamer=dreamer, entries_dict=entries_dict)
         data = {'message': response_message}
     elif request.method == 'GET':

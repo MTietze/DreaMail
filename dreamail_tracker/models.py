@@ -59,6 +59,7 @@ class Dreamer(User):
         
 class JournalEntry(models.Model):
     entry = models.TextField()
+    title = models.TextField(blank=True, db_index=True)
     message = models.TextField(blank=True)
     date = models.DateField(default=timezone.now, db_index=True)
     dreamer = models.ForeignKey(Dreamer, db_index=True)
@@ -79,7 +80,9 @@ class JournalEntry(models.Model):
             dreams = []
 
             for entry in entries:
-                dreams.append(cls.objects.create(dreamer=dreamer, entry=entry, date=entry_date))
+                if isinstance(entry, str):
+                    entry = {'text': entry}
+                dreams.append(cls.objects.create(dreamer=dreamer, entry=entry['text'], date=entry_date, title=entry.get('title','')))
 
             message = dreamer.generate_message()
 
@@ -88,7 +91,7 @@ class JournalEntry(models.Model):
                 dream.save()
 
             formatted_date = entry_date.strftime("%A %d. %B %Y")
-            joined_entries = '\n\n'.join(entries)
+            joined_entries = '\n\n'.join([e['text'] for e in entries])
             response_message = "{0}\n\nYour dreams have been recorded and the universe has responded:\n\n{3}\n\n{1}\n\n{3}\n\nOn this day, you dreamt:\n\n{2}"\
                 .format(formatted_date, message, joined_entries, DIVIDER)
 
