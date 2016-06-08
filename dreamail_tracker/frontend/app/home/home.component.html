@@ -4,8 +4,9 @@
         class="journal-entry">
   	<p>New Journal Entry</p>
   	<input type="date" [(ngModel)]="dream.date" class="dream-date">
-  	<textarea [(ngModel)]="dream.text" class="dream-input"></textarea>
-  	<button>Submit</button>
+    <input type="text" [(ngModel)]="dream.title" class="dream-title" placeholder="Title">
+  	<textarea [(ngModel)]="dream.text" class="dream-input" placeholder="Journal entry content"></textarea>
+  	<button class="btn btn-primary">Submit</button>
   </form>
   <div class="dream-response">{{message}}</div>
 </div>
