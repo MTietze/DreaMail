@@ -25,9 +25,9 @@ if os.environ.get('ENV') != 'Production':
                 if v and v[0] != '#':
                     v = v.split('=')
                     env[v[0]] = v[1]
-    
+
         os.environ.update(env)
-    
+
     load_environment()
 
 SECRET_KEY = os.environ['SECRET_KEY']
@@ -43,7 +43,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['dreamailing.herokuapp.com']
+ALLOWED_HOSTS = ['dreamailing.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
