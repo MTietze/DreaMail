@@ -5,6 +5,7 @@ import {FORM_PROVIDERS, Location} from '@angular/common';
 import {Home} from './home';
 import {About} from './about';
 import {Journal} from './journal';
+import {Login} from './account/login';
 import {NavBar} from './navbar.component';
 
 /*
@@ -46,6 +47,7 @@ import {NavBar} from './navbar.component';
   new Route({path: '', component: Home}),
   new Route({path: 'about', component: About}),
   new Route({path: 'journal', component: Journal})
+  new Route({path: 'login', component: Login})
 ])
 export class App {
   name: string = 'DreaMail';
