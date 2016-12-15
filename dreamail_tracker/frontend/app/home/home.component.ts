@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {FORM_DIRECTIVES} from '@angular/common';
 import {Http, Headers} from '@angular/http';
+import 'rxjs/add/operator/map'
 
 @Component({
   selector: 'new-dream',
-  directives: [
-    ...FORM_DIRECTIVES
-  ],
+  directives: [],
   pipes: [],
   styles: [],
   template: require('./home.component.html')()
@@ -23,7 +21,7 @@ export default class HomeComponent implements OnInit {
     this.headers.append('X-CSRFToken', CSRF);
     this.headers.append('Content-Type', 'application/json');
   }
- 
+
   onSubmit(form: any): void {
     let post_data = JSON.stringify(this.dream)
     this.http.post('/api/dream/', post_data, {headers: this.headers})

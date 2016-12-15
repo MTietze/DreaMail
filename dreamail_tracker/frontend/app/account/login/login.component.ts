@@ -1,19 +1,23 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Http, Headers} from '@angular/http';
-import 'rxjs/add/operator/map'
 
 @Component({
   selector: 'login',
   template: require('./login.component.html')()
 })
 
-export default class LoginComponent {
+export default class LoginComponent implements OnInit{
 
   constructor(public http: Http) {
     this.http = http;
   }
 
-  submit(){
+  submit() {
+    return true;
+  }
+
+  ngOnInit(){
+    return true;
   }
 
 }

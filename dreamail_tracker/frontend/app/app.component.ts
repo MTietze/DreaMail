@@ -1,11 +1,5 @@
 import {Component} from '@angular/core';
-import {Routes, Route, Router, ROUTER_DIRECTIVES} from '@angular/router';
-import {FORM_PROVIDERS, Location} from '@angular/common';
-
-import {Home} from './home';
-import {About} from './about';
-import {Journal} from './journal';
-import {Login} from './account/login';
+import {Location} from '@angular/common';
 import {NavBar} from './navbar.component';
 
 /*
@@ -14,8 +8,7 @@ import {NavBar} from './navbar.component';
  */
 @Component({
   selector: 'app',
-  providers: [...FORM_PROVIDERS],
-  directives: [...ROUTER_DIRECTIVES, NavBar],
+  directives: [NavBar],
   pipes: [],
   styles: [`
     :host {
@@ -43,18 +36,13 @@ import {NavBar} from './navbar.component';
     </footer>
   `
 })
-@Routes([
-  new Route({path: '', component: Home}),
-  new Route({path: 'about', component: About}),
-  new Route({path: 'journal', component: Journal})
-  new Route({path: 'login', component: Login})
-])
-export class App {
+
+export class AppComponent {
   name: string = 'DreaMail';
   url: string = 'https://github.com/MTietze';
   constructor(public loc: Location) {
-    if(ANGULAR_PATH){
-      loc.go(ANGULAR_PATH)
-    }
+    //if(ANGULAR_PATH){
+    //  loc.go(ANGULAR_PATH)
+    //}
   }
 }

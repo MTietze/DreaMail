@@ -1,12 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FORM_DIRECTIVES} from '@angular/common';
 import {Http, Headers} from '@angular/http';
 
 @Component({
   selector: 'new-dream',
-  directives: [
-    ...FORM_DIRECTIVES
-  ],
+  directives: [],
   pipes: [],
   styles: [],
   template: require('./journal.component.html')()

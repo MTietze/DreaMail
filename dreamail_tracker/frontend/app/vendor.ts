@@ -5,7 +5,7 @@ import 'reflect-metadata';
 import '@angular/compiler';
 import '@angular/platform-browser';
 
-if ('production' === 'BRUNCH_ENVIRONMENT') {
-  let ngCore = require('@angular/core');
-  ngCore.enableProdMode();
-}
+//if ('production' === 'BRUNCH_ENVIRONMENT') {
+//  let ngCore = require('@angular/core');
+//  ngCore.enableProdMode();
+//}
