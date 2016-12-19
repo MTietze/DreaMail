@@ -6,7 +6,7 @@ import {Http, Headers} from '@angular/http';
   template: require('./login.component.html')()
 })
 
-export default class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit{
 
   constructor(public http: Http) {
     this.http = http;

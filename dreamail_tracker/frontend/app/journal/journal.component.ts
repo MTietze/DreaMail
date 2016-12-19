@@ -8,7 +8,7 @@ import {Http, Headers} from '@angular/http';
   styles: [],
   template: require('./journal.component.html')()
 })
-export default class JournalComponent implements OnInit {
+export class JournalComponent implements OnInit {
   public dreams: Object;
   public message: string;
   private headers: Headers;

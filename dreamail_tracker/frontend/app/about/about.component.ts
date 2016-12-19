@@ -7,16 +7,16 @@ import 'rxjs/add/operator/map'
   template: require('./about.component.html')()
 })
 
-export default class AboutComponent implements OnInit, OnDestroy {
+export class AboutComponent implements OnInit, OnDestroy {
   public name: string;
   public lexicon: string;
-  
+
   constructor(public http: Http) {
     this.name = 'Brunch';
     this.http = http;
   }
 
-  
+
 
   getLexicon() {
   	let headers = new Headers();

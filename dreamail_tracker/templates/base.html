@@ -3,7 +3,8 @@
 		<title>
 			Dreamailing
 		</title>
-	</head>
+    <base href="/">
+  </head>
 	<body lang="en">
 		{% if user.is_authenticated %}
 		    <p>Welcome, {{ user.username }}. Thanks for logging in.</p>

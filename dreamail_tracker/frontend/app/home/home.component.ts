@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map'
   styles: [],
   template: require('./home.component.html')()
 })
-export default class HomeComponent implements OnInit {
+export  class HomeComponent implements OnInit {
   public dream: Object;
   public message: string;
   private headers: Headers;
@@ -36,8 +36,8 @@ export default class HomeComponent implements OnInit {
     console.log('hello Home component');
   }
 
-  logError(err) {
-    console.error('There was an error: ' + err);
-  }
+  //logError(err) {
+  //  console.error('There was an error: ' + err);
+  //}
 
 }

@@ -27,7 +27,6 @@ import {NavBar} from './navbar.component';
     <header>
       <h1>Welcome to {{ name }}</h1>
     </header>
-    <navbar></navbar>
     <main>
       <router-outlet></router-outlet>
     </main>
@@ -41,6 +40,7 @@ export class AppComponent {
   name: string = 'DreaMail';
   url: string = 'https://github.com/MTietze';
   constructor(public loc: Location) {
+    this.loc = loc;
     //if(ANGULAR_PATH){
     //  loc.go(ANGULAR_PATH)
     //}
