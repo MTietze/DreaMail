@@ -1,16 +1,19 @@
+{% load staticfiles %}
 <html>
 	<head>
 		<title>
 			Dreamailing
 		</title>
     <base href="/">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
   </head>
 	<body lang="en">
-		{% if user.is_authenticated %}
+  {% if user.is_authenticated %}
 		    <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
-		{% else %}
+        {% block content %}{% endblock content %}
+  {% else %}
 		    <p>Welcome, new user. Please <a href='/login'> log in </a>.</p>
 		{% endif %}
-		{% block content %}{% endblock content %}
 	</body>
 </html>

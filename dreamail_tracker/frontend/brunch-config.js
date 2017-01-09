@@ -17,6 +17,7 @@ exports.config = {
                 'base.js': /^app/
             },
             order: {
+                before: ['app.module.component.ts'],
                 after: [/\.html$/, /\.css$/]
             }
         },

@@ -1,11 +1,12 @@
 <div>
 	<form #f="ngForm"
         (ngSubmit)="onSubmit(f)"
-        class="journal-entry">
+        class="journal-entry"
+        >
   	<p>New Journal Entry</p>
-  	<input type="date" [(ngModel)]="dream.date" class="dream-date">
-    <input type="text" [(ngModel)]="dream.title" class="dream-title" placeholder="Title">
-  	<textarea [(ngModel)]="dream.text" class="dream-input" placeholder="Journal entry content"></textarea>
+  	<input type="date" [(ngModel)]="dream.date" class="dream-date" name="dream-date">
+    <input type="text" [(ngModel)]="dream.title" class="dream-title" placeholder="Title" name="dream-title">
+  	<textarea [(ngModel)]="dream.text" class="dream-input" placeholder="Journal entry content" name="dream-content"></textarea>
   	<button class="btn btn-primary">Submit</button>
   </form>
   <div class="dream-response">{{message}}</div>

@@ -22,7 +22,7 @@ class DreamView(TemplateView):
 
 class AngularRedirectView(RedirectView):
     """
-        If a provider search url is entered including an angular path, but without the hashtag, grab the path and any parameters
+        If a url is entered including an angular path, but without the hashtag, grab the path and any parameters
         and store them in the session before redirecting, so they may be passed to angular as context data.
     """
 

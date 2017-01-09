@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map'
   styles: [],
   template: require('./home.component.html')()
 })
-export  class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit {
   public dream: Object;
   public message: string;
   private headers: Headers;

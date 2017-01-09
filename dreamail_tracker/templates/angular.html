@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block content %}
-    <script type="text/javascript">
+  <script type="text/javascript">
         const ANGULAR_PARAMS = {{ ANGULAR_PARAMS|safe }};
         const ANGULAR_PATH = "{{ ANGULAR_PATH }}";
         const CSRF = "{{ csrf_token }}";
@@ -18,31 +18,11 @@
             }
         }
     </script>
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
 
-    <script type="text/javascript" src="{% static 'vendor.js' %}"></script>
-    <script type="text/javascript" src="{% static 'base.js' %}"></script>
-    <script>require('main');</script>
+    <app></app>
 
-    {% verbatim %}
-    <app>
-        Loading...
-    </app>
-    {% endverbatim %}
-    <!--   <section ng-app='dreamail'>
-    <base href="/dreamail/">
-    <div >
-
-      <div id="spin-wrapper" ng-show="bigLoader.loading">
-        <img id="spinner" ng-src="{{STATIC_URL}}scout/img/loader.gif">
-        <div id="spinnerbk"></div>
-      </div>
-
-      {% verbatim %}
-        <div ui-view id="main-view"></div>
-      {% endverbatim %}
-    </div>
-  </section> -->
+  <script type="text/javascript" src="{% static 'vendor.js' %}"></script>
+  <script type="text/javascript" src="{% static 'base.js' %}"></script>
+  <script>require('main');</script>
 
 {% endblock content %}

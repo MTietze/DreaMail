@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {Location} from '@angular/common';
-import './vendor'
 
 @Component({
   selector: 'navbar',
@@ -45,7 +44,7 @@ import './vendor'
     </nav>
   `
 })
-export class NavBar {
+export class NavBarComponent {
   constructor(public loc: Location) {}
 
   isActive(path: string) {

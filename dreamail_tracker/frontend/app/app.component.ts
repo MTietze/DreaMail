@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Location} from '@angular/common';
-import {NavBar} from './navbar.component';
+import {NavBarComponent} from './navbar.component';
 
 /*
  * App Component
@@ -8,7 +8,7 @@ import {NavBar} from './navbar.component';
  */
 @Component({
   selector: 'app',
-  directives: [NavBar],
+  directives: [NavBarComponent],
   pipes: [],
   styles: [`
     :host {
@@ -27,6 +27,7 @@ import {NavBar} from './navbar.component';
     <header>
       <h1>Welcome to {{ name }}</h1>
     </header>
+    <navbar></navbar>
     <main>
       <router-outlet></router-outlet>
     </main>
