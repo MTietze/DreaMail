@@ -8,8 +8,6 @@ import {NavBarComponent} from './navbar.component';
  */
 @Component({
   selector: 'app',
-  directives: [NavBarComponent],
-  pipes: [],
   styles: [`
     :host {
       font-family: sans-serif;

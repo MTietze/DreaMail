@@ -7,7 +7,8 @@ exports.config = {
             'assets',
             'styles',
             'vendor',
-            'node_modules/bootstrap/dist'
+            'node_modules/bootstrap/dist',
+            'node_modules/wordcloud/src'
         ]
     },
     files: {
@@ -17,7 +18,6 @@ exports.config = {
                 'base.js': /^app/
             },
             order: {
-                before: ['app.module.component.ts'],
                 after: [/\.html$/, /\.css$/]
             }
         },
