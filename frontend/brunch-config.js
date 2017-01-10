@@ -1,14 +1,13 @@
 exports.config = {
     // See http://brunch.io/#documentation for docs.
     paths: {
-        public: './../static',
+        public: './../dreamail_tracker/static',
         watched: [
             'app',
             'assets',
             'styles',
             'vendor',
             'node_modules/bootstrap/dist',
-            'node_modules/wordcloud/src'
         ]
     },
     files: {
