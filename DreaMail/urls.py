@@ -25,9 +25,9 @@ urlpatterns = [
     url(r'^$', DreamView.as_view(), name='home'),
     url(r'^api/get_lexicon/$', api.get_lexicon, name='get_dreams'),
     url(r'^api/dream/$', api.dream, name='get_dreams'),
-    # url(
-    #     r'^(?P<angularpath>)',
-    #     AngularRedirectView.as_view(),
-    #     name='angularredirect'
-    # ),
+    url(
+        r'^(?P<angularpath>.*)',
+        AngularRedirectView.as_view(),
+        name='angularredirect'
+    ),
 ]
