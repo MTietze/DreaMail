@@ -1,7 +1,7 @@
 exports.config = {
     // See http://brunch.io/#documentation for docs.
     paths: {
-        public: './../dreamail_tracker/static',
+        public: './dreamail_tracker/static',
         watched: [
             'app',
             'assets',
