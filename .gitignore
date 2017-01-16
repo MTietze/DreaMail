@@ -3,5 +3,6 @@
 *.log
 .idea
 node_modules
-bower_components 
+bower_components
 static
+npm-debug.log.*
