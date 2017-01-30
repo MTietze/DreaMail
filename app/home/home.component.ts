@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Http, Headers} from '@angular/http';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'new-dream',
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit(form: any): void {
-    let post_data = JSON.stringify(this.dream)
+    let post_data = JSON.stringify(this.dream);
     this.http.post('/api/dream/', post_data, {headers: this.headers})
       .map(res => res.json())
       .subscribe(

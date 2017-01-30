@@ -40,7 +40,7 @@ export class AppComponent {
   url: string = 'https://github.com/MTietze';
   constructor(public loc: Location) {
     this.loc = loc;
-    if(ANGULAR_PATH){
+    if(ANGULAR_PATH) {
       loc.go(ANGULAR_PATH)
     }
   }
