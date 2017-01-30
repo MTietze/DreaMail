@@ -47,6 +47,6 @@ export class AboutComponent implements OnInit, OnDestroy {
   	console.error('There was an error: ' + err);
   }
 
-  ngOnInit() { console.log('About::ngOnInit'); this.setText();}
-  ngOnDestroy() { console.log('About::ngOnDestroy'); }
+  ngOnInit() { this.setText();}
+  ngOnDestroy() { console.log(); }
 }

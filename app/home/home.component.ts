@@ -32,12 +32,10 @@ export class HomeComponent implements OnInit {
       );
   }
 
-  ngOnInit() {
-    console.log('hello Home component');
-  }
+  ngOnInit() {}
 
-  //logError(err) {
-  //  console.error('There was an error: ' + err);
-  //}
+  logError(err) {
+   console.error('There was an error: ' + err);
+  }
 
 }
