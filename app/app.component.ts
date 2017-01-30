@@ -26,7 +26,7 @@ import {NavBarComponent} from './navbar.component';
       <h1>Welcome to {{ name }}</h1>
     </header>
     <navbar></navbar>
-    <main>
+    <main class="container">
       <router-outlet></router-outlet>
     </main>
     <footer>
