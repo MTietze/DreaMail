@@ -56,7 +56,7 @@ class Dreamer(User):
         message = [m.center(longest, ' ') for m in message]
         message = "\n".join(message)
         return message
-        
+
 class JournalEntry(models.Model):
     entry = models.TextField()
     title = models.TextField(blank=True, db_index=True)
@@ -64,6 +64,9 @@ class JournalEntry(models.Model):
     date = models.DateField(default=timezone.now, db_index=True)
     dreamer = models.ForeignKey(Dreamer, db_index=True)
     objects = models.Manager()
+
+    class Meta:
+        ordering = ['-date']
 
     def get_data(self):
         data = {
