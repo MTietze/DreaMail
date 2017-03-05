@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   private headers: Headers;
 
   constructor(public http: Http) {
-    this.dream = { date: new Date(Date.now()).toISOString().slice(0, 10)};
+    this.dream = { date: new Date().toDateInputValue()};
     this.http = http;
     this.headers = new Headers();
     this.headers.append('X-CSRFToken', CSRF);

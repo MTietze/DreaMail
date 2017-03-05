@@ -35,7 +35,7 @@ import {NavBarComponent} from './navbar.component';
   `
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
   name: string = 'DreaMail';
   url: string = 'https://github.com/MTietze';
   constructor(public loc: Location) {
@@ -43,5 +43,13 @@ export class AppComponent {
     if(ANGULAR_PATH) {
       loc.go(ANGULAR_PATH)
     }
+  }
+
+  ngOnInit() {
+    Date.prototype.toDateInputValue = (function () {
+      var local = new Date(this)
+      local.setMinutes(this.getMinutes() - this.getTimezoneOffset())
+      return local.toJSON().slice(0, 10)
+    });
   }
 }
