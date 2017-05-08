@@ -1,4 +1,6 @@
-<div>
+<div infinite-scroll
+     [infiniteScrollDistance]="0"
+     (scrolled)="onScrollDown()" >
 	<div *ngFor='let dream of dreams'
         class="journal-entry row">
   	<p>{{ dream.date }}</p>

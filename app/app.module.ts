@@ -1,8 +1,9 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule}   from '@angular/forms';
-import {routing} from './app.routes';
 import {HttpModule} from '@angular/http';
+import { InfiniteScrollModule } from 'angular2-infinite-scroll';
+import {routing} from './app.routes';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {AboutComponent} from './about/about.component';
@@ -15,7 +16,8 @@ import {LoginComponent} from './account/login/login.component';
         BrowserModule,
         FormsModule,
         routing,
-        HttpModule
+        HttpModule,
+        InfiniteScrollModule
     ],
     declarations: [
         AppComponent,
