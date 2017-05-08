@@ -32,7 +32,7 @@ export class JournalComponent implements OnInit {
   }
 
   getResults() {
-    return this.http.get(`/api/dream/${this.page}/`, {headers: this.headers})
+    return this.http.get(`/api/dream/${this.page}`, {headers: this.headers})
         .map(res => res.json())
         .subscribe(
             data => {
