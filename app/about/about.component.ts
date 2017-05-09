@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { WordService} from './word.service';

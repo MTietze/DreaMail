@@ -10,6 +10,12 @@ import {AboutComponent} from './about/about.component';
 import {JournalComponent} from './journal/journal.component';
 import {NavBarComponent} from './navbar.component';
 import {LoginComponent} from './account/login/login.component';
+import { RequestOptions, Http, XHRBackend} from '@angular/http';
+import {HttpClient} from './http';
+
+function httpClientFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
+  return new HttpClient(xhrBackend, requestOptions);
+}
 
 @NgModule({
     imports: [
@@ -27,6 +33,9 @@ import {LoginComponent} from './account/login/login.component';
         NavBarComponent,
         LoginComponent
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    providers: [
+       { provide: Http, useFactory: httpClientFactory, deps: [XHRBackend, RequestOptions]},
+    ],
 })
 export class AppModule {}

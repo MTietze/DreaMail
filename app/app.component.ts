@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {NavBarComponent} from './navbar.component';
 
@@ -35,21 +35,16 @@ import {NavBarComponent} from './navbar.component';
   `
 })
 
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   name: string = 'DreaMail';
   url: string = 'https://github.com/MTietze';
   constructor(public loc: Location) {
     this.loc = loc;
-    if(ANGULAR_PATH) {
-      loc.go(ANGULAR_PATH)
-    }
   }
 
   ngOnInit() {
-    Date.prototype.toDateInputValue = (function () {
-      var local = new Date(this)
-      local.setMinutes(this.getMinutes() - this.getTimezoneOffset())
-      return local.toJSON().slice(0, 10)
-    });
+    if(ANGULAR_PATH) {
+      this.loc.go(ANGULAR_PATH);
+    }
   }
 }

@@ -3,7 +3,6 @@ import {Location} from '@angular/common';
 
 @Component({
   selector: 'navbar',
-  directives: [],
   styles: [`
     nav ul {
       list-style-type: none;
