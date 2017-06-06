@@ -22,7 +22,7 @@
     "zone.js": "^0.8.11"
   },
   "devDependencies": {
-    "@types/node": "^7.0.21",
+    "@types/node": "^7.0.27",
     "auto-reload-brunch": "2.7.1",
     "brunch": "^2.10.9",
     "brunch-typescript": "2.1.0",
@@ -32,8 +32,8 @@
     "html-brunch": "^1.6.1",
     "javascript-brunch": "^2.10.0",
     "less-brunch": "^2.10.0",
-    "tslint": "5.2.0",
-    "typescript": "^2.3.2",
+    "tslint": "5.4.2",
+    "typescript": "^2.3.4",
     "uglify-js-brunch": "^2.10.0"
   },
   "scripts": {
