@@ -3,6 +3,7 @@ from django.views.decorators.http import require_http_methods
 import json
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.postgres.search import SearchVector
 from datetime import datetime
 
 
@@ -15,7 +16,7 @@ def get_lexicon(request):
 
 
 @require_http_methods(['POST', 'GET'])
-def dream(request, page):
+def dream(request, page, text):
     dreamer = Dreamer.objects.get(user_ptr_id=request.user.id)
     if request.method == 'POST':
         dream_data = json.loads(request.read().decode())
@@ -24,7 +25,13 @@ def dream(request, page):
         response_message = JournalEntry.save_entry(dreamer=dreamer, entries_dict=entries_dict)
         data = {'message': response_message}
     elif request.method == 'GET':
-        paginator = Paginator(dreamer.journalentry_set.all(), 10)
+        if text:
+            entries = dreamer.journalentry_set\
+                             .annotate(search=SearchVector('entry', 'title'))\
+                             .filter(search=text)
+        else:
+            entries = dreamer.journalentry_set.all()
+        paginator = Paginator(entries, 10)
         try:
             paginated_dreams = paginator.page(page)
         except PageNotAnInteger:
