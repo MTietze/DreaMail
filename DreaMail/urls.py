@@ -15,16 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.contrib.auth import views as auth_views, urls
 from dreamail_tracker.views import DreamView, AngularRedirectView
-from dreamail_tracker.api import api
+from dreamail_tracker.api import urls as api_urls
 
 urlpatterns = [
     url('^', include('django.contrib.auth.urls')),
+    url('^api/', include(api_urls)),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', DreamView.as_view(), name='home'),
-    url(r'^api/get_lexicon/$', api.get_lexicon, name='get_lexicon'),
-    url(r'^api/dream/(?P<page>\d{0,4})$', api.dream, name='get_dreams'),
     url(
         r'^(?P<angularpath>.*)',
         AngularRedirectView.as_view(),
