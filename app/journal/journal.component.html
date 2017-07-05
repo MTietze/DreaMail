@@ -1,6 +1,10 @@
 <div infinite-scroll
      [infiniteScrollDistance]="0"
      (scrolled)="onScrollDown()" >
+  <input type="text"
+         placeholder="Search Entries and Titles"
+         [ngModel]="search_text"
+         (ngModelChange)='changed($event)'>
 	<div *ngFor='let dream of dreams'
         class="journal-entry row">
   	<p>{{ dream.date }}</p>
