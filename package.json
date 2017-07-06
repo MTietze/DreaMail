@@ -3,6 +3,16 @@
   "version": "1.0.0",
   "description": "Application for keeping a dream journal",
   "main": "brunch-config.js",
+  "engines": {
+    "node": "^7.x",
+    "npm": "4.x"
+  },
+  "author": "Max Tietze",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MTietze/DreaMail.git"
+  },
   "dependencies": {
     "@angular/common": "4.2.5",
     "@angular/compiler": "4.2.5",
@@ -12,33 +22,31 @@
     "@angular/platform-browser": "4.2.5",
     "@angular/platform-browser-dynamic": "4.2.5",
     "@angular/router": "4.2.5",
-    "angular2-infinite-scroll": "^0.3.5",
     "bootstrap": "^3.3.7",
     "es6-promise": "4.1.1",
     "es6-shim": "0.35.3",
+    "ngx-infinite-scroll": "^0.5.1",
     "reflect-metadata": "0.1.10",
     "rxjs": "5.4.2",
     "wordcloud": "^1.0.6",
-    "zone.js": "^0.8.11"
+    "zone.js": "^0.8.12"
   },
   "devDependencies": {
     "@types/node": "^8.0.7",
     "auto-reload-brunch": "2.7.1",
     "brunch": "^2.10.9",
     "brunch-typescript": "2.1.0",
-    "codelyzer": "^3.0.1",
+    "codelyzer": "^3.1.2",
     "css-brunch": "^2.10.0",
     "environment-brunch": "^1.0.0",
     "html-brunch": "^1.6.1",
     "javascript-brunch": "^2.10.0",
     "less-brunch": "^2.10.0",
-    "tslint": "5.4.3",
+    "tslint": "^5.4.3",
     "typescript": "^2.3.4",
     "uglify-js-brunch": "^2.10.0"
   },
   "scripts": {
     "postinstall": "brunch b"
-  },
-  "author": "Max Tietze",
-  "license": "ISC"
+  }
 }
