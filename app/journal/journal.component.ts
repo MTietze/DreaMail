@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Http} from '@angular/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/share';
 
 @Component({
   selector: 'journal',
@@ -14,56 +15,53 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 export class JournalComponent implements OnInit {
   dreams: Observable<Array<Object>>;
-  private results_done: boolean;
-  private page: number;
-  private search_text = new BehaviorSubject('');
+  page: number = 1;
+  terms: string = '';
+  private loading: boolean;
+  private searchTermStream = new BehaviorSubject<string>('');
+  private pageStream = new Subject<number>();
 
   constructor(public http: Http) {
-    this.page = 1;
     this.http = http;
-    this.results_done = false;
+    this.loading = false;
   }
 
   ngOnInit() {
-    this.dreams = this.search_text
-      .debounceTime(300)        // wait 300ms after each keystroke before considering the term
-      .distinctUntilChanged()   // ignore if next search term is same as previous
-      .switchMap(term => this.getResults(term))
-      .catch(error => {
-        // TODO: add real error handling
-        console.log(error);
-        return Observable.of<Array<Object>>([]);
+    const pageSource = this.pageStream
+      .map(pageNum => {
+        return { search: this.terms, page: pageNum };
       });
+    const searchSource = this.searchTermStream
+      .debounceTime(300)
+      .distinctUntilChanged()
+      .map(searchTerm => {
+        return {search: searchTerm, page: this.page};
+      });
+    this.dreams = pageSource
+      .merge(searchSource)
+      .mergeMap((params: {search: string, page: number}) => this.getResults(params.search, params.page))
+      .scan((acc, curr) => this.page > 1 ? acc.concat(curr) : curr, [])
+      .share()
+    this.dreams.subscribe( () => this.loading = false);
   }
 
-  logError(err) {
-    console.error('There was an error: ' + err);
-  }
-
-  getResults(term: string) {
-    return this.http.get(`/api/dream/${this.page}/${term}`)
+  getResults(term: string, page: number) {
+    return this.http.get(`/api/dream/${page}/${term}`)
         .map(res => res.json().dreams);
-        // .subscribe(
-        //     data => {
-        //       if (data.dreams.length) {
-        //         this.dreams = this.dreams.concat(data.dreams);
-        //       }else {
-        //         this.results_done = true;
-        //       }
-        //     },
-        //     err => this.logError(err)
-        // );
   }
 
   onScrollDown() {
-    if (!this.results_done) {
+    if (!this.loading) {
+      this.loading = true;
       this.page += 1;
-      // this.getResults();
+      this.pageStream.next(this.page);
     }
   }
 
   search(term: string): void {
-    this.search_text.next(term);
+    this.terms = term;
+    this.page = 1;
+    this.searchTermStream.next(term);
   }
 
 }
