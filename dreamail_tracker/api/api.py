@@ -16,7 +16,7 @@ def get_lexicon(request):
 
 
 @require_http_methods(['POST', 'GET'])
-def dream(request, page, text):
+def dream(request, page=None, text=None):
     dreamer = Dreamer.objects.get(user_ptr_id=request.user.id)
     if request.method == 'POST':
         dream_data = json.loads(request.read().decode())
