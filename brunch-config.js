@@ -4,8 +4,8 @@ exports.config = {
         public: './dreamail_tracker/static',
         watched: [
             'app',
-            'assets',
             'styles',
+            'fonts',
             'vendor',
             'node_modules/bootstrap/dist',
         ]

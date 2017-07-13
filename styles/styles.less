@@ -1,17 +1,75 @@
+@brand-primary: #d9edff;
+@darkshades: #54648C;
+@darkaccent: #77A7E2;
+@lighshades: #F7F3DC;
+@lightaccent: #ADA89E;
+
 .journal-entry{
-	.dream-date{
-	}
-	.dream-input{
-		display: block;
-	    width: 50%;
-	    height: 30%;
-	    margin: 1% 0;
-	}
-	.dream-title{
-		display: block;
-    	margin: 1% 0;
-	}
+  font-size: 1.3em;
+  border: 1px solid @darkshades;
+  border-radius: 1%;
+  padding: 3%;
+  background-color: @brand-primary;
+  box-shadow: 1px 1px 16px @darkshades;
+  margin: 2em 0;
+
+	.dream-date{}
+  .dream-message{
+    margin-top: 3%;
+    text-align: center;
+    color: @darkshades;
+    max-height: 295px;
+    padding: 3%;
+    margin: 3% auto;
+    background-color: @lighshades;
+    border-radius: 100% 100% 0 0;
+  }
+  .dream-response{
+    white-space: pre-wrap;
+    font-weight: bold;
+    font-family: DS_Mysticora;
+    text-transform: capitalize;
+    font-size: 1.4em;
+  }
 }
-.dream-response{
-	white-space: pre-wrap;
+
+
+#search-box{
+	min-width: 300px;
+	margin: 20px 0;
+}
+
+.new-entry{
+  .dream-input{
+    display: block;
+    width: 50%;
+    height: 30%;
+    margin: 1% 0;
+  }
+  .dream-title{
+    display: block;
+    margin: 1% 0;
+  }
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 1em 0;
+  padding: 0 1em;
+  border-top: 1px solid @darkshades;
+  border-bottom: 1px solid @darkshades;
+}
+nav li {
+  display: inline-block;
+  padding: 0;
+}
+nav a {
+  color: @darkshades;
+  text-decoration: none;
+  padding: 0.5em;
+  display: inline-block;
+}
+nav .active {
+  background-color: @darkaccent;
+  color: #fff;
 }

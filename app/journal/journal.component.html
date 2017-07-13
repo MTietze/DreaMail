@@ -1,16 +1,21 @@
-<div infinite-scroll
+<div class="row"
+     infinite-scroll
      [infiniteScrollDistance]="0"
      (scrolled)="onScrollDown()" >
-  <input #searchBox
-         placeholder="Search Entries and Titles"
-         id="search-box"
-         (keyup)='search(searchBox.value)'>
+  <div class="col-sm-12">
+    <input #searchBox
+          placeholder="Search Journal"
+          id="search-box"
+          (keyup)='search(searchBox.value)'>
+  </div>
 	<div *ngFor='let dream of dreams | async'
-        class="journal-entry row">
-  	<p>{{ dream.date }}</p>
-    <p class="dream-title">{{ dream.title }}</p>
+        class="journal-entry col-sm-12">
+    <h3><strong>{{ dream.title || (dream.date | date) }}</strong></h3>
+    <h5 class="dream-date" *ngIf="dream.title">{{ dream.date | date}}</h5>
     <p class="dream-text">{{ dream.entry }}</p>
-    <p  *ngIf="dream.message">The universe responded:</p>
-    <p class="dream-response">{{ dream.message }}</p>
+    <div *ngIf="dream.message" class="dream-message">
+      <h4>The universe responded:</h4>
+      <p class="dream-response">{{ dream.message }}</p>
+    </div>
   </div>
 </div>

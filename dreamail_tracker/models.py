@@ -72,7 +72,8 @@ class JournalEntry(models.Model):
         data = {
             'entry': self.entry,
             'date': str(self.date),
-            'message': self.message
+            'message': self.message,
+            'title': self.title
         }
         return data
 
