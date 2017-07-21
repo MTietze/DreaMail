@@ -14,14 +14,14 @@
     "url": "https://github.com/MTietze/DreaMail.git"
   },
   "dependencies": {
-    "@angular/common": "4.2.6",
-    "@angular/compiler": "4.2.6",
-    "@angular/core": "4.2.6",
-    "@angular/forms": "4.2.6",
-    "@angular/http": "4.2.6",
-    "@angular/platform-browser": "4.2.6",
-    "@angular/platform-browser-dynamic": "4.2.6",
-    "@angular/router": "4.2.6",
+    "@angular/common": "4.3.1",
+    "@angular/compiler": "4.3.1",
+    "@angular/core": "4.3.1",
+    "@angular/forms": "4.3.1",
+    "@angular/http": "4.3.1",
+    "@angular/platform-browser": "4.3.1",
+    "@angular/platform-browser-dynamic": "4.3.1",
+    "@angular/router": "4.3.1",
     "bootstrap": "^3.3.7",
     "es6-promise": "4.1.1",
     "es6-shim": "0.35.3",
@@ -29,10 +29,10 @@
     "reflect-metadata": "0.1.10",
     "rxjs": "5.4.2",
     "wordcloud": "^1.0.6",
-    "zone.js": "^0.8.13"
+    "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@types/node": "^8.0.11",
+    "@types/node": "^8.0.14",
     "auto-reload-brunch": "2.7.1",
     "brunch": "^2.10.9",
     "brunch-typescript": "2.1.0",
@@ -43,7 +43,7 @@
     "javascript-brunch": "^2.10.0",
     "less-brunch": "^2.10.0",
     "tslint": "^5.5.0",
-    "typescript": "^2.4.1",
+    "typescript": "^2.4.2",
     "uglify-js-brunch": "^2.10.0"
   },
   "scripts": {
