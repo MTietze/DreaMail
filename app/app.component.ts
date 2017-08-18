@@ -23,7 +23,7 @@ import {NavBarComponent} from './navbar.component';
   `],
   template: `
     <header>
-      <h1>Welcome to {{ name }}</h1>
+      <h1>Welcome to DreaMail, {{ username }}</h1>
     </header>
     <navbar></navbar>
     <main class="container">
@@ -36,7 +36,6 @@ import {NavBarComponent} from './navbar.component';
 })
 
 export class AppComponent implements OnInit {
-  name: string = 'DreaMail';
   url: string = 'https://github.com/MTietze';
   constructor(public loc: Location) {
     this.loc = loc;
@@ -46,5 +45,6 @@ export class AppComponent implements OnInit {
     if(ANGULAR_PATH) {
       this.loc.go(ANGULAR_PATH);
     }
+    this.username = username
   }
 }

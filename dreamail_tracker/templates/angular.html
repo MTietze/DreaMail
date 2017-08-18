@@ -6,19 +6,8 @@
         const ANGULAR_PARAMS = {{ ANGULAR_PARAMS|safe }};
         const ANGULAR_PATH = "{{ ANGULAR_PATH }}";
         const CSRF = "{{ csrf_token }}";
-        const config = {
-            APP_NAME: 'dreamail',
-            API_PATH: '/api/',
-            API_ENDPOINTS: {
-                'dreams': 'dreams/'
-            },
-            PATHS: {
-                HOME: 'home',
-                DREAMS: 'dreams',
-            }
-        }
+        const username = "{{user.username}}"
     </script>
-
     <app></app>
 
   <script type="text/javascript" src="{% static 'vendor.js' %}"></script>
