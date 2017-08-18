@@ -9,7 +9,8 @@ export const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'about', component: AboutComponent},
     {path: 'journal', component: JournalComponent},
-    {path: 'login', component: LoginComponent}
+    {path: 'login', component: LoginComponent},
+    { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 
 export const routing = RouterModule.forRoot(routes);
